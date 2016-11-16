@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Dashboard 4all</title>
+	<!-- Compiled and minified CSS -->
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="z-depth-4">
+	<div class="container">
+		<div class="row">
+			<div class="col s12">
+				<h1 class="dash-title center-align">Dashboard</h1>
+			</div>
+		</div>
+	</div>
+</header>
+<main>
+	<div id="app">
+		<widgets></widgets>		
+	<template id="widgets-template">
+		<div class="container">
+			<!-- New Orders -->
+			<div class="row">
+			    <div class="col s12 m6 l3">
+			    	<div class="box-widgets">
+			    		<div class="box-orders side-img"><i class="fa fa-shopping-bag fa-3x" aria-hidden="true"></i>   		
+				    		<div class="side-value">{{widgets.newOrders}}</div>
+				    		<div class="box-title">New Orders</div>
+			    		</div>
+			    	</div>
+			    </div>
+			<!-- Comments -->
+			    <div class="col s12 m6 l3">
+			    	<div class="box-widgets">
+			    		<div class="box-comments side-img"><i class="fa fa-comment-o fa-3x" aria-hidden="true"></i>    		
+				    		<div class="side-value">{{widgets.comments}}</div>
+				    		<div class="box-title">Comments</div>
+			    		</div>
+			    	</div>
+			    </div> 
+			<!-- New Users -->
+			     <div class="col s12 m6 l3">
+			    	<div class="box-widgets">
+			    		<div class="box-users side-img"><i class="fa fa-user-o fa-3x" aria-hidden="true"></i>    		
+				    		<div class="side-value">{{widgets.newUsers}}</div>
+				    		<div class="box-title">New Users</div>
+			    		</div>
+			    	</div>
+			    </div>
+			<!-- Page Views -->
+			    <div class="col s12 m6 l3">
+			    	<div class="box-widgets">
+			    		<div class="box-views side-img"><i class="fa fa-window-maximize fa-3x" aria-hidden="true"></i>    	
+				    		<div class="side-value">{{widgets.pageViews}}</div>
+				    		<div class="box-title">Page Views</div>
+			    		</div>
+			    	</div>
+			    </div>
+			</div>
+		</div>		
+	</template>
+		<div class="container">
+			<div class="row">
+				<div class="col s12 l12">
+					<h1 class="dash-title center-align">Site Traffic Overview</h1>
+					<canvas class="center-align" id="chart" width="500" height="400"></canvas>		
+				</div>
+			</div>
+		</div>
+		<!-- Chat -->
+		<div class="container">
+				<div class="row">
+					<div class="s12">
+						<h5 class="dash-title left-align"><i class="fa fa-comments-o fa-2x" aria-hidden="true"></i>Chat</h5>
+					</div>
+				</div>
+				<chat></chat>
+				<template id="chat-template">
+					<div class="col s12 m8 offset-m2 l6 offset-l3">
+				        <div class="card-panel grey lighten-5 z-depth-1">
+				          <div class="row valign-wrapper" v-for="message in messages">
+				            <div class="col s2">
+				              <img src="{{message.portrait}}" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+				            </div>
+				            <div class="col s10">
+				              <span class="black-text">
+				                {{message.userName}}
+				              </span>
+				              <span class="grey-text right-align">{{message.time}}</span>
+				              <p class="black-text">				                
+				                {{message.message}}
+				              </p>
+				            </div>				            
+				          </div>
+				        </div>
+				      </div>			
+
+				      <div class="row">
+					    <form class="col s12">
+					      <div class="row">
+					        <div class="input-field col s12">
+					          <textarea v-model="newMessage" v-on:keyup.enter="addMessage" id="textarea1" class="materialize-textarea" placeholder="Message"></textarea>        
+					        </div>
+					      </div>
+					      <a class="btn">Button</a>
+					    </form>
+					  </div>
+				</template>
+		</div>	
+	</div>
+</main>
+	<footer class="page-footer footer">
+      <div class="container">
+        <div class="row">
+          <div class="col l12 s12 center-align">
+            <h5 class="white-text">Dashboard</h5>
+            <p class="grey-text text-lighten-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem sed tempora molestias, impedit est rem aliquid animi. Est dicta, maiores, id recusandae vitae facere, placeat dolor cupiditate doloribus, magni explicabo.</p>
+          </div>          
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">© 2016 Dashboard, All rights reserved. <a class="grey-text text-lighten-4 right" href="#">Developer Leonardo Lima</a></div>
+      </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/vue/1.0.28/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.9.3/vue-resource.min.js"></script>
+
+    <script src="js/components/widgets.js"></script>
+    <script src="js/chart.js"></script>
+</body>
+</html>
